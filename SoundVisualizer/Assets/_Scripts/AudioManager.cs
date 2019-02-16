@@ -1,18 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent (typeof (AudioSource))]
 public class AudioManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    AudioSource audioSource;
+    public float[] samples = new float[512];
+    
+
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        
+        GetSpectrumAudioSource();
+    }
+
+
+    void GetSpectrumAudioSource()
+    {
+        audioSource.GetSpectrumData(samples, 0, FFTWindow.Blackman);
     }
 }
