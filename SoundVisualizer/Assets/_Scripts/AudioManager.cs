@@ -4,7 +4,7 @@
 public class AudioManager : MonoBehaviour
 {
     AudioSource audioSource;
-    public float[] samples = new float[512];
+    public static float[] samples = new float[512];
     
 
     void Start()
