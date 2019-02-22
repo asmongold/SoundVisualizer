@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 
-[RequireComponent (typeof (AudioSource))]
+[RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
     AudioSource audioSource;
     public static float[] samples = new float[512];
     public static float[] freqBands = new float[8];
+    public static float[] bandBuffer = new float[8];
+    float[] bufferDecreaseLevel = new float[8];
 
     void Start()
     {
@@ -17,8 +19,25 @@ public class AudioManager : MonoBehaviour
     {
         GetSpectrumAudioSource();
         CreateFrequencyBands();
+        BandBuffer();
     }
 
+    private void BandBuffer()
+    {
+        for (int i = 0; i < 8; ++i)
+        {
+            if (freqBands[i] > bandBuffer[i])
+            {
+                bandBuffer[i] = freqBands[i];
+                bufferDecreaseLevel[i] = 0.005f;
+            }
+            if(freqBands[i] < bandBuffer[i])
+            {
+                bandBuffer[i] -= bufferDecreaseLevel[i];
+                bufferDecreaseLevel[i] *= 1.2f;
+            }
+        }
+    }
 
     void GetSpectrumAudioSource()
     {
