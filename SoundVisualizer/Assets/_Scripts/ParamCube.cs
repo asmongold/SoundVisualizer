@@ -7,11 +7,6 @@ public class ParamCube : MonoBehaviour
     public float scaleLevel;
     public bool useBuffer;
 
-    void Start()
-    {
-       
-    }
-
    
     void Update()
     {

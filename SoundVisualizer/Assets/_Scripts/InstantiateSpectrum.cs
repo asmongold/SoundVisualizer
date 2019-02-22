@@ -15,7 +15,7 @@ public class InstantiateSpectrum : MonoBehaviour
             instanceSampleCube.transform.parent = transform;
             instanceSampleCube.name = "SampleCube" + i;
 
-            //360° Circle / 512 Cubes = 0.703125° rotation per spawned cube 
+            //512 Cubes / 360° Circle = 0.703125° rotation per spawned cube 
             transform.transform.eulerAngles = new Vector3(0, -0.703125f * i, 0);
             instanceSampleCube.transform.position = Vector3.forward * 100;
             sampleCube[i] = instanceSampleCube;
